@@ -16,4 +16,6 @@ target 'Flixter' do
     # Pods for testing
   end
 
+  pod 'AFNetworking'
+
 end
