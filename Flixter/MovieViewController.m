@@ -32,7 +32,7 @@
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:refreshControl atIndex:0];
     
-    // Calling the API
+    // api request (boilerplate)
     NSURL *url = [NSURL URLWithString:@"https://api.themoviedb.org/3/movie/now_playing?api_key=bfc0a5530e166a5f2fc8843954b151fd"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
@@ -40,7 +40,7 @@
                                                      delegateQueue:[NSOperationQueue mainQueue]];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
            if (error != nil) {
-               if (error.code == -1009){
+               if (error.code == -1009){ // Network error
                    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Network error"
                                               message:@"Check your internet connection"
                                               preferredStyle:UIAlertControllerStyleAlert];
@@ -54,7 +54,7 @@
                    
                }
            }
-           else {
+           else { // Successful API request
                NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
                // Get the array of movies
                self.movies = dataDictionary[@"results"];
@@ -72,14 +72,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   
     TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TableViewCell" forIndexPath:indexPath];
-    
     NSDictionary *movie = self.movies[indexPath.row];
     
     // set title label
     cell.titleLabel.text = movie[@"title"];
     // set synopsis lable
     cell.synopsisLabel.text = movie[@"overview"];
-    
     // set image view
     NSString *baseURLString = @"https://image.tmdb.org/t/p/w500";
     NSString *posterURLString = movie[@"poster_path"];
@@ -92,8 +90,8 @@
 }
 
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
-        // TODO: remove boilerplate
-        // Create NSURL and NSURLRequest
+       
+        // api request (boilerplate)
         NSURL *url = [NSURL URLWithString:@"https://api.themoviedb.org/3/movie/now_playing?api_key=bfc0a5530e166a5f2fc8843954b151fd"];
         NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
         NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
@@ -102,7 +100,7 @@
         session.configuration.requestCachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
         NSURLSessionDataTask *task = [session dataTaskWithRequest:request
                                                 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-           // ... Use the new data to update the data source ...
+           
             if (error != nil) {
                 NSLog(@"%@", [error localizedDescription]);
                 UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"My Alert"
@@ -117,7 +115,6 @@
             }
             else {
                 NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-                // Get the array of movies
                 self.movies = dataDictionary[@"results"];
                 [self.tableView reloadData];
             }
