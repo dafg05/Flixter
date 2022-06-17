@@ -10,6 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GridCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *posterView;
 
 @end
 

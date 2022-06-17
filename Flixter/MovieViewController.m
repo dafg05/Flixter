@@ -16,17 +16,18 @@
 @property (nonatomic, strong) NSArray *movies;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingIndicator;
 
+
 @end
 
 @implementation MovieViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // start loading indicator
-    [self.loadingIndicator startAnimating];
+    [self.loadingIndicator startAnimating]; // start loading indicator
+    
     self.tableView.dataSource = self;
     
-    // create instance of refrersh control
+    // create instance of refresh control
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:refreshControl atIndex:0];
@@ -39,7 +40,19 @@
                                                      delegateQueue:[NSOperationQueue mainQueue]];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
            if (error != nil) {
-               NSLog(@"%@", [error localizedDescription]);
+               if (error.code == -1009){
+                   UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Network error"
+                                              message:@"Check your internet connection"
+                                              preferredStyle:UIAlertControllerStyleAlert];
+
+                   UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                  handler:^(UIAlertAction * action) {}];
+
+                   [alert addAction:defaultAction];
+                   [self presentViewController:alert animated:YES completion:nil];
+                       NSLog(@"%@", [error localizedDescription]);
+                   
+               }
            }
            else {
                NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
@@ -50,7 +63,6 @@
        }];
     [task resume];
     // api request done. stop loading indicator
-    [self.loadingIndicator stopAnimating];
     
 }
 
@@ -80,6 +92,7 @@
 }
 
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
+        // TODO: remove boilerplate
         // Create NSURL and NSURLRequest
         NSURL *url = [NSURL URLWithString:@"https://api.themoviedb.org/3/movie/now_playing?api_key=bfc0a5530e166a5f2fc8843954b151fd"];
         NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
@@ -92,6 +105,15 @@
            // ... Use the new data to update the data source ...
             if (error != nil) {
                 NSLog(@"%@", [error localizedDescription]);
+                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"My Alert"
+                                           message:@"This is an alert."
+                                           preferredStyle:UIAlertControllerStyleAlert];
+
+                UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                               handler:^(UIAlertAction * action) {}];
+
+                [alert addAction:defaultAction];
+                [self presentViewController:alert animated:YES completion:nil];
             }
             else {
                 NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
