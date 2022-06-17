@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DetailsViewController : UIViewController
 
+@property (weak, nonatomic) NSDictionary *detailDict;
+
 @end
 
 NS_ASSUME_NONNULL_END
