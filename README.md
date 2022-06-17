@@ -2,7 +2,7 @@
 
 **Flixter** is a movies app using the [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
-Time spent: **10** hours spent in total
+Time spent: **15** hours spent in total
 
 ## User Stories
 
@@ -19,7 +19,7 @@ The following **required** functionality is complete:
 The following **optional** features are implemented:
 
 - [x] User can tap a poster in the collection view to see a detail screen of that movie
-- [ ] User can search for a movie.
+- [x] User can search for a movie.
 - [ ] All images fade in as they are loading.
 - [ ] User can view the large movie poster by tapping on a cell.
 - [ ] For the large poster, load the low resolution image first and then switch to the high resolution image when complete.
@@ -28,36 +28,28 @@ The following **optional** features are implemented:
 - [ ] Customize the UI.
 - [ ] Run your app on a real device.
 
-The following **additional** features are implemented:
-
-- [ ] List anything else that you can get done to improve the app functionality!
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
-2.
+1. How to make code modular? For the api fetching and other functionality shared between ViewControllers, I used more boilerplate code than I would've liked
+2. Adjusting sizes of views across different screen sizes.
 
 ## Video Walkthrough
 
-Here's a walkthrough of implemented user stories:
-
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-
-GIF created with [Kap](https://getkap.co/).
+See sr.gif in main project directory.
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+As this was basically my first iOS app, getting to know the Objective C language and general codeflow was the biggest challenges.
 
 ## Credits
 
-List an 3rd party libraries, icons, graphics, or other assets you used in your app.
 
 - [AFNetworking](https://github.com/AFNetworking/AFNetworking) - networking task library
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2022] [Daniel Flores Garcia]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
