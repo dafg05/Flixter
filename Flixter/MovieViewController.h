@@ -9,7 +9,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MovieViewController : UIViewController
+@interface MovieViewController : UIViewController <UISearchBarDelegate>
+@property (weak, nonatomic) IBOutlet UISearchBar *navBar;
 
 @end
 
