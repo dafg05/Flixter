@@ -31,7 +31,7 @@
     isFiltered = false;
     self.navBar.delegate = self;
     [self.loadingIndicator startAnimating]; // start loading indicator
-    
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.dataSource = self;
     
     // create instance of refresh control
