@@ -29,18 +29,11 @@ The following **optional** features are implemented:
 - [ ] Run your app on a real device.
 
 
-Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
-
-1. How to make code modular? For the api fetching and other functionality shared between ViewControllers, I used more boilerplate code than I would've liked
-2. Adjusting sizes of views across different screen sizes.
-
-## Video Walkthrough
-
 See sr.gif in main project directory.
 
 ## Notes
 
-As this was basically my first iOS app, getting to know the Objective C language and general codeflow was the biggest challenges.
+As this was basically my first iOS app, getting to know the Objective C language and general codeflow were the biggest challenges.
 
 ## Credits
 
